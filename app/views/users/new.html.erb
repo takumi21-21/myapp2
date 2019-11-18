@@ -1,0 +1,34 @@
+<div class="wrapper text-center">
+  <div class="container signup-container">
+
+    <div class="row">
+      <div class="offset-md-3 col-md-6">
+        <h1 class="text-black">新規登録</h1>
+        <%= form_for @user do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+          <div class="form-group">
+            <%= f.label :name, class:'text-black'%>
+            <%= f.text_field :name, class:'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :image, class: 'text-black' %>
+            <%= f.file_field :image, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, class: 'text-black' %>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password, class: 'text-black' %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation, class: 'text-black' %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+          <%= f.submit '登録', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

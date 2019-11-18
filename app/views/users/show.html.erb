@@ -1,0 +1,20 @@
+<div class="show-wrapper text-center">
+  <div class="container show-container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="user-info">
+            <% if @user.image.attached? %>
+            <%= image_tag @user.image %>
+            <% end %>
+        </div>
+        <div class="user-item">
+          <h1><%= @user.name %></h1>
+          <p><%= link_to 'User Update', edit_user_path %></p>
+          <p><%= link_to 'User Delete', user_path, method: :delete %></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+</div>
