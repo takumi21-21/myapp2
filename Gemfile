@@ -44,6 +44,8 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails', '~> 4.11'
 end
 
 group :development do
@@ -70,4 +72,4 @@ gem 'execjs'
 gem 'mini_racer'
 gem 'bootstrap', '~> 4.1.1'
 gem 'bcrypt'
-gem 'rspec-rails'
+gem 'carrierwave'

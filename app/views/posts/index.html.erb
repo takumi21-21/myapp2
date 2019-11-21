@@ -1,0 +1,21 @@
+<div class="post-index-wrapper">
+  <div class="container">
+    <div class="row">
+      <% @posts.each do |post| %>
+          <div class="h-100 offset-md-1 col-md-3 border">
+            <div class="post-index-single">
+              <h2 class="post-author">
+                <%= link_to post.user.name, user_path(id: post.user.id) %>
+              </h2>
+              <%= image_tag post.image.url %>
+              <%= image_tag 'icons/heart-black.png', class: 'post-index-icon' %>
+              <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
+              <p class="post-text">
+                <%= post.description %>
+              </p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

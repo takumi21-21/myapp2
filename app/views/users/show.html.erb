@@ -1,4 +1,4 @@
-<div class="show-wrapper text-center">
+<div class="show-wrapper ">
   <div class="container show-container">
     <div class="row">
       <div class="col-md-8">
@@ -9,10 +9,27 @@
         </div>
         <div class="user-item">
           <h1><%= @user.name %></h1>
-          <p><%= link_to 'User Update', edit_user_path %></p>
-          <p><%= link_to 'User Delete', user_path, method: :delete %></p>
+          <% if current_user.id == @user.id %>
+            <p><%= link_to 'User Update', edit_user_path %></p>
+            <p><%= link_to 'User Delete', user_path, method: :delete %></p>
+          <% end %>
         </div>
       </div>
+    </div>
+    <div class="row text-center">
+      <div class="offset-md-2 col-md-6">
+        　投稿一覧
+      </div>
+    </div>
+    <div class="row user-post-row">
+      <%= @user.posts.each do |post| %>
+        <div class="offset-md-4 col-md-6">
+          <div class="user-post">
+            <%= image_tag post.image.url %>
+            <%= post.description %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
