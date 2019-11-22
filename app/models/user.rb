@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :password, presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,30}+\z/i }
   has_secure_password
-  has_one_attached :image
-  has_many :posts
+  has_one_attached :image, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :favorites
+  has_many :favorite_posts, through: :favorites, source: 'post'
 end

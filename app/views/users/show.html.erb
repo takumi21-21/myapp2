@@ -1,4 +1,4 @@
-<div class="show-wrapper ">
+<div class="user-show-wrapper ">
   <div class="container show-container">
     <div class="row">
       <div class="col-md-8">
@@ -9,9 +9,11 @@
         </div>
         <div class="user-item">
           <h1><%= @user.name %></h1>
-          <% if current_user.id == @user.id %>
-            <p><%= link_to 'User Update', edit_user_path %></p>
-            <p><%= link_to 'User Delete', user_path, method: :delete %></p>
+          <% if logged_in? %>
+            <% if current_user.id == @user.id %>
+              <p><%= link_to 'User Update', edit_user_path %></p>
+              <p><%= link_to 'User Delete', user_path, method: :delete %></p>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -22,11 +24,13 @@
       </div>
     </div>
     <div class="row user-post-row">
-      <%= @user.posts.each do |post| %>
+      <% @user.posts.each do |post| %>
         <div class="offset-md-4 col-md-6">
           <div class="user-post">
-            <%= image_tag post.image.url %>
-            <%= post.description %>
+            <%= link_to post_path(post) do %>
+              <%= image_tag post.image.url %>
+            <% end %>
+            <%= simple_format(post.description) %>
           </div>
         </div>
       <% end %>

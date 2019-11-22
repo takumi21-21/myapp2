@@ -1,0 +1,33 @@
+<div class="show-wrapper">
+  <div class="container post-show-container">
+    <div class="row">
+      <div class="offset-md-3 col-md-6 ">
+        <h2><%= @post.user.name %></h2>
+        <div class="post-show-image">
+          <%= image_tag @post.image.url %>
+          <% if logged_in? %>
+            <% if !@post.favorite_users.include?(current_user) %>
+              <%= link_to favorites_path(post_id: @post.id), method: :post  do %>
+                <%= image_tag 'icons/heart-black.png', class: 'post-show-icon' %>
+              <% end %>
+            <% else %>
+              <%= link_to favorites_path(post_id: @post.id), method: :delete  do %>
+                <%= image_tag 'icons/heart-red.png', class: 'post-show-icon' %>
+              <% end %>
+            <% end %>
+            <%= @post.favorite_users.count %>
+            <%= image_tag 'icons/comment.png', class: 'post-show-icon' %>
+          <% end %>
+        </div>
+        <% if logged_in? %>
+          <% if current_user.id == @post.user.id %>
+            <div class="post-show-item">
+              <p><%= link_to 'Update', edit_post_path(@post) %></p>
+              <p><%= link_to 'Delete', post_path, method: :delete %></p>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+    </div>
+  </div>
+</div>

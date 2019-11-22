@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -8,4 +9,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
+
+  get 'favorites/index'
+  post '/favorites', to: 'favorites#create'
+  delete '/favorites', to: 'favorites#destroy'
 end

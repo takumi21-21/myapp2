@@ -1,0 +1,21 @@
+<div class="wrapper favorite-index-wrapper">
+  <div class="container favorite-index-container">
+    <div class="row">
+      <% @favorite_posts.each do |favorite_post| %>
+        <div class="offset-md-1 col-md-4">
+          <div class="favorite-post-index-single">
+            <h2 class="favorite-post-author">
+              <%= link_to favorite_post.user.name, user_path(id: favorite_post.user.id) %>
+            </h2>
+            <%= link_to post_path(id: favorite_post.id) do %>
+              <%= image_tag favorite_post.image.url %>
+            <% end %>
+            <p class="post-text">
+              <%= simple_format(favorite_post.description) %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="wrapper text-center">
+  <div class="container post-edit-container">
+    <div class="row">
+      <div class="offset-md-3 col-md-6">
+        <h1 class="text-black">投稿編集</h1>
+          <%= form_for @post do |f| %>
+            <div class="form-group">
+              <%= f.label :image, class: 'text-black' %>
+              <%= f.file_field :image, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description, class: 'text-black' %>
+              <%= f.text_field :description, class: 'form-control' %>
+            </div>
+            <%= f.submit 'Update', class: 'btn btn-primary' %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
