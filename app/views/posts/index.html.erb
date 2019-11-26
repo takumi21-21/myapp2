@@ -23,6 +23,11 @@
                 <%= post.favorite_users.count %>
                 <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
                 <% end %>
+              <div class="post-des">
+                <p>投稿者: <%= post.user.name %></p>
+                <p>店名: </p>
+                <p>所在地: <%= post.address %></p>
+              </div>
               <p class="post-text">
                 <%= simple_format(post.description) %>
               </p>

@@ -1,18 +1,23 @@
-<h2>gmap</h2>
-<div id='map'></div>
+<div class="wrapper maps-rapper">
+  <div class="container maps-container">
+    <div class="row">
+      <div class="col-md-12">
+        <div style='width: 100%;'>
+          <div id="map" style='width: 100%; height: 600px;'></div>
+        </div>
 
-<style>
-#map{
-  height: 400px;
-}
-</style>
-
-<script>
-function initMap(){
-  let map = new google.maps.Map(document.getElementById('map'), {
-  center: {lat: -34.397, lng: 150.644},
-  zoom: 8
-  });
-}
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA39E1MfbWlrxbwQA6YXZfZkmE2QY0S_o&callback=initMap" async defer></script>
+        <script type="text/javascript">
+          <% @posts.each do |post| %>
+          handler = Gmaps.build('Google');
+          handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            handler.getMap().setZoom(10);
+          });
+          <% end %>
+        </script>
+      </div>
+    </div>
+  </div>
+</div>

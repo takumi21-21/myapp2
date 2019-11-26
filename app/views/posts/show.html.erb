@@ -1,31 +1,7 @@
 <div class="show-wrapper">
-   <div style='width: 100%;'>
-     <div id="map" style='width: 100%; height: 33vh;'></div>
-   </div>
-
-   <script type="text/javascript">
-     handler = Gmaps.build('Google');
-     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-       markers = handler.addMarkers([
-         {
-           "lat": <%= @post.latitude %>,
-           "lng": <%= @post.longitude %>,
-           "picture": {
-             "width":  32,
-             "height": 32
-           },
-           "infowindow": '<%= @post.description %>'
-         }
-       ]);
-       handler.bounds.extendWith(markers);
-       handler.fitMapToBounds();
-       handler.getMap().setZoom(15);
-     });
-   </script>
-
-    <div class="row">
-      <div class="offset-md-3 col-md-6 ">
-        <h2><%= @post.user.name %></h2>
+  <div class="container show-container">
+    <div class="row show-row">
+      <div class="col-md-6">
         <div class="post-show-image">
           <%= image_tag @post.image.url %>
           <% if logged_in? %>
@@ -50,6 +26,41 @@
             </div>
           <% end %>
         <% end %>
+      </div>
+      <div class="col-md-6">
+        <div class="post-des">
+          <p>投稿者: <%= @post.user.name %></p>
+          <p>店名: </p>
+          <p>所在地: <%= @post.address %></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="row show-row">
+      <div class="offset-md-1 col-md-10">
+        <div style='width: 100%;'>
+          <div id="map" style='width: 100%; height: 33vh;'></div>
+        </div>
+
+        <script type="text/javascript">
+          handler = Gmaps.build('Google');
+          handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+            markers = handler.addMarkers([
+            {
+              "lat": <%= @post.latitude %>,
+              "lng": <%= @post.longitude %>,
+              "picture": {
+                "width":  32,
+                "height": 32
+              },
+              "infowindow": '<%= @post.description %>'
+            }
+            ]);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            handler.getMap().setZoom(15);
+          });
+        </script>
       </div>
     </div>
   </div>
