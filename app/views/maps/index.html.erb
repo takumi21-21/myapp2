@@ -10,7 +10,17 @@
           <% @posts.each do |post| %>
           handler = Gmaps.build('Google');
           handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-            markers = handler.addMarkers(<%=raw @hash.to_json %>);
+            markers = handler.addMarkers([
+            {
+              "lat": <%= post.latitude %>,
+              "lng": <%= post.longitude %>,
+              "picture": {
+                "width":  32,
+                "height": 32
+              },
+              "infowindow": '<%= link_to post.name, post_path(post) %>'
+            }
+            ]);
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
             handler.getMap().setZoom(10);

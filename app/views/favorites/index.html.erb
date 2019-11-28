@@ -4,8 +4,11 @@
       <% @favorite_posts.each do |favorite_post| %>
         <div class="offset-md-1 col-md-4">
           <div class="favorite-post-index-single">
+            <p>
+              <%= link_to "投稿者: #{favorite_post.user.name}", user_path(id: favorite_post.user.id) %>
+            </p>
             <h2 class="favorite-post-author">
-              <%= link_to favorite_post.user.name, user_path(id: favorite_post.user.id) %>
+              <%= link_to favorite_post.name, post_path(id: favorite_post.id) %>
             </h2>
             <%= link_to post_path(id: favorite_post.id) do %>
               <%= image_tag favorite_post.image.url %>
@@ -16,6 +19,9 @@
           </div>
         </div>
       <% end %>
+    </div>
+    <div class="paginate">
+      <%= paginate @favorite_posts %>
     </div>
   </div>
 </div>

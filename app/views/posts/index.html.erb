@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <% @posts.each do |post| %>
-          <div class="h-100 offset-md-1 col-md-3 border">
+          <div class="offset-md-1  col-md-3 border rounded">
             <div class="post-index-single">
               <h2 class="post-author">
-                <%= link_to post.user.name, user_path(id: post.user.id) %>
+                <%= link_to post.name, post_path(post) %>
               </h2>
               <%= link_to post_path(post) do %>
                 <%= image_tag post.image.url %>
@@ -25,7 +25,7 @@
                 <% end %>
               <div class="post-des">
                 <p>投稿者: <%= post.user.name %></p>
-                <p>店名: </p>
+                <p>店名: <%= post.name %> </p>
                 <p>所在地: <%= post.address %></p>
               </div>
               <p class="post-text">
@@ -34,6 +34,9 @@
             </div>
           </div>
       <% end %>
+    </div>
+    <div class="paginate">
+      <%= paginate @posts %>
     </div>
   </div>
 </div>
