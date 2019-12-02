@@ -22,8 +22,8 @@
         <% if logged_in? %>
           <% if current_user.id == @post.user.id %>
             <div class="post-show-item">
-              <button type="btn" class="btn btn-info"><%= link_to '編集', edit_post_path(@post) %></button>
-              <button type="btn" class="btn btn-danger"><%= link_to '削除', post_path, method: :delete %></button>
+              <button type="btn" class="btn btn-info"><%= link_to '編集', edit_post_path(@post), class: "text-white"%></button>
+              <button type="btn" class="btn btn-danger"><%= link_to '削除', post_path, method: :delete, class: "text-white" %></button>
             </div>
           <% end %>
         <% end %>
@@ -31,7 +31,6 @@
       <div class="col-md-6">
         <div class="post-show-des">
           <p><b>投稿者</b>: <%= @post.user.name %></p>
-          <p><b>店名</b>: <%= @post.name %> </p>
           <p><b>麺</b>: <%= @post.noodle %></p>
           <p><b>スープ</b>: <%= @post.soup %></p>
           <p><b>所在地</b>: <%= @post.address %></p>
