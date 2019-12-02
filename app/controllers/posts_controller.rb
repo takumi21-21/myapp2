@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all.page(params[:page]).per(9)
+    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).page(params[:page]).per(9)
   end
 
   def show
@@ -30,7 +32,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find_by(id: params[:id])
-    if @post = Post.update.attributes(post_params)
+    if @post = @post.update_attributes(post_params)
       flash[:success] = "投稿を更新しました"
       redirect_to posts_url
     else
@@ -49,7 +51,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :description, :image, :address, :latitude, :longitude)
+    params.require(:post).permit(:name, :description, :image, :address, :latitude, :longitude, :noodle, :soup)
   end
 
 end

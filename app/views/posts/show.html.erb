@@ -1,5 +1,6 @@
 <div class="show-wrapper">
   <div class="container show-container">
+      <h2 class="post-show-name"><%= @post.name %></h2>
     <div class="row show-row">
       <div class="col-md-6">
         <div class="post-show-image">
@@ -28,13 +29,14 @@
         <% end %>
       </div>
       <div class="col-md-6">
-        <div class="post-des">
-          <p>投稿者: <%= @post.user.name %></p>
-          <p>店名: <%= @post.name %> </p>
-          <p>所在地: <%= @post.address %></p>
+        <div class="post-show-des">
+          <p><b>投稿者</b>: <%= @post.user.name %></p>
+          <p><b>店名</b>: <%= @post.name %> </p>
+          <p><b>麺</b>: <%= @post.noodle %></p>
+          <p><b>スープ</b>: <%= @post.soup %></p>
+          <p><b>所在地</b>: <%= @post.address %></p>
         </div>
       </div>
-
     </div>
     <div class="row show-row">
       <div class="offset-md-1 col-md-10">

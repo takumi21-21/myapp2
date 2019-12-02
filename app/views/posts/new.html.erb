@@ -1,27 +1,37 @@
-<div class="wrapper text-center" >
-  <div class="container postnew-container">
+<div class="post-wrapper text-center">
+  <div class="container post-edit-container">
     <div class="row">
       <div class="offset-md-3 col-md-6">
-        <h1 class="text-center">Add Picture</h1>
-        <%= form_for @post do |f| %>
-          <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-controle' %>
-          </div>
-          <div class="form-grop">
-            <%= f.label :image %>
-            <%= f.file_field :image, class: 'form-controle' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :address %>
-            <%= f.text_field :address, class: 'form-controle' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :description %>
-            <%= f.text_area :description, class: 'form-controle' %>
-          </div>
-          <%= f.submit '投稿', class: 'btn btn-primary' %>
-        <% end %>
+        <h1 class="text-black">新規投稿</h1>
+          <%= form_for @post do |f| %>
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :image, class: 'text-black' %>
+              <%= f.file_field :image, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :noodle %>
+              <%= f.select :noodle, ["極太麺", "太麺", "中太麺", "細麺"],
+              {include_blank: "選択ボックス"}, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :soup %>
+              <%= f.select :soup, ["濃厚", "普通", "あっさり"],
+              {include_blank: "選択ボックス"}, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address %>
+              <%= f.text_field :address, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description, class: 'text-black' %>
+              <%= f.text_area :description, class: 'form-control' %>
+            </div>
+            <%= f.submit '投稿', class: 'btn btn-primary' %>
+          <% end %>
       </div>
     </div>
   </div>

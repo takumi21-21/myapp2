@@ -1,5 +1,5 @@
 <div class="user-show-wrapper ">
-  <div class="container show-container">
+  <div class="show-container">
     <div class="row">
       <div class="col-md-8">
         <div class="user-info">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="row user-post-row">
-      <% @user.posts.each do |post| %>
+      <% @userposts.each do |post| %>
         <div class="offset-md-4 col-md-6">
           <%= "店名: #{post.name}" %>
           <div class="user-post">
@@ -35,6 +35,7 @@
           </div>
         </div>
       <% end %>
+      <%= @userposts.count %>
       <div class="paginate">
         <%= paginate @userposts %>
       </div>

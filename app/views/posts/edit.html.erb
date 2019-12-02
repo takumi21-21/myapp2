@@ -9,18 +9,28 @@
               <%= f.text_field :name, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= f.label :address %>
-              <%= f.text_field :address, class: "form-control" %>
-            </div>
-            <div class="form-group">
               <%= f.label :image, class: 'text-black' %>
               <%= f.file_field :image, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :description, class: 'text-black' %>
-              <%= f.text_field :description, class: 'form-control' %>
+              <%= f.label :noodle %>
+              <%= f.select :noodle, ["極太麺", "太麺", "普通麺", "細麺"],
+              {include_blank: "選択ボックス"}, class: "form-control" %>
             </div>
-            <%= f.submit 'Update', class: 'btn btn-primary' %>
+            <div class="form-group">
+              <%= f.label :soup %>
+              <%= f.select :soup, ["濃厚", "普通", "あっさり"],
+              {include_blank: "選択ボックス"}, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address %>
+              <%= f.text_field :address, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description, class: 'text-black' %>
+              <%= f.text_area :description, class: 'form-control' %>
+            </div>
+            <%= f.submit '更新', class: 'btn btn-primary' %>
           <% end %>
       </div>
     </div>

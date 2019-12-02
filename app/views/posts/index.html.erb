@@ -1,8 +1,36 @@
 <div class="post-index-wrapper">
   <div class="container">
+        <div class="p-4 mt-4 search-form border bg-red">
+          <h4><b>検索</b></h4>
+          <%= search_form_for @q do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.label :"店名" %>
+              <%= f.search_field :name_cont, class: 'form-control' %>
+            </div>
+            <div class="col-md-6">
+              <%= f.label :"住所" %>
+              <%= f.search_field :address_cont, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mt-3 col-md-6">
+              <%= f.label :"麺の種類" %>
+              <%= f.select :noodle_eq, ["極太麺", "太麺", "中太麺", "細麺"],
+              {include_blank: "全て"}, class: 'form-control' %>
+            </div>
+            <div class="mt-3 col-md-6">
+              <%= f.label :"スープの種類" %>
+              <%= f.select :soup_eq, ["濃厚", "普通", "あっさり"],
+              {include_blank: "全て"}, class: 'form-control' %>
+            </div>
+          </div>
+          <%= f.submit "検索", class: "my-4 offset-md-4 col-md-4 btn btn-success"%>
+          <% end %>
+        </div>
     <div class="row">
       <% @posts.each do |post| %>
-          <div class="offset-md-1  col-md-3 border rounded">
+          <div class="p-2 col-md-4 border rounded　linkbox post-index">
             <div class="post-index-single">
               <h2 class="post-author">
                 <%= link_to post.name, post_path(post) %>
@@ -23,20 +51,21 @@
                 <%= post.favorite_users.count %>
                 <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
                 <% end %>
-              <div class="post-des">
-                <p>投稿者: <%= post.user.name %></p>
-                <p>店名: <%= post.name %> </p>
-                <p>所在地: <%= post.address %></p>
+              <div class="post-index-des">
+                <p><b>投稿者</b><%= post.user.name %></p>
+                <p><b>店名</b><%= post.name %> </p>
+                <p><b>麺</b><%= post.noodle %></p>
+                <p><b>スープ</b><%= post.soup %></p>
+                <p><b>所在地</b><%= post.address %></p>
               </div>
-              <p class="post-text">
-                <%= simple_format(post.description) %>
-              </p>
+              <h5 class="post-index-text-title"><b>コメント</b></h5>
+              <div class="post-index-text">
+                <p><%= simple_format(post.description) %></p>
+              </div>
             </div>
           </div>
       <% end %>
     </div>
-    <div class="paginate">
-      <%= paginate @posts %>
-    </div>
+    <%= paginate @posts %>
   </div>
 </div>
