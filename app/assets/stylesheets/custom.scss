@@ -29,6 +29,19 @@ a{
   margin-right: 30px;
 }
 
+.current_user {
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  a {
+    display: inline-block;
+    line-height: 30px;
+  }
+}
+
 
 //user-index
 
@@ -92,6 +105,7 @@ a{
   margin-top: 30px;
   padding: 10px 0;
   border-bottom: solid 1px black;
+  font-size: 20px;
 }
 
 .user-post-item {
@@ -104,12 +118,14 @@ a{
   margin-top: 30px;
 }
 
-.post-index:hover {
+.post-index-single:hover {
   box-shadow: 0 0 10px 0 black;
 }
 
-
 .post-index-single{
+  border: solid 3px black;
+  border-radius: 10px;
+  padding: 30px;
   .post-author {
     border-radius: 10px;
     padding: 10px;
@@ -182,6 +198,7 @@ a{
   .post-show-icon {
     width: 10%;
     height: 10%;
+    padding: 10px;
   }
 }
 
@@ -215,16 +232,36 @@ a{
   }
 }
 
+
+//favorite-index
+
+.favorite-post-title {
+  padding:20px;
+  border-bottom: solid 1px black;
+  margin-bottom: 50px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.favorite-post-index-single {
+  padding: 10px;
+  margin-top: 30px;
+  img {
+    border-radius: 10px;
+  }
+}
+
+
 //ペジネーション
 /*ページネーション自体のデザイン*/
 .pagination>li>a {
   border: none;     /*枠線をなくす*/
-  color: #696969;   /*文字の色を変える*/
+  color: black;   /*文字の色を変える*/
 }
 
 /* 表示しているページ番号のデザイン */
 .pagination>.active>a {
-  background: #93c9ff;     /*背景の色を変える*/
+  background: black;     /*背景の色を変える*/
   border-radius: 15px;     /*角を丸くする*/
 }
 

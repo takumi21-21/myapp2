@@ -40,28 +40,31 @@
           <%= link_to "ログアウト", logout_path, method: :delete %>
         </li>
         <li class="navbar-text current_user">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: "round-circle"%>
+          <% end %>
           <%= link_to current_user.name, user_path(current_user) %>
         </li>
       <% else %>
         <!-- <li class="navbar-text">
           <%= link_to "新規登録", new_user_path %>
         </li> -->
-        <!-- <li class="navbar-text">
+        <li class="navbar-text">
           <%= link_to "ログイン", login_path %>
-        </li> -->
+        </li>
       <% end %>
       </ul>
     </nav>
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
       <%= yield %>
     </div>
     <script>
-      $(function(){
-        setTimeout("$('.alert').fadeOut('slow')", 1000)
-      });
+      // $(function(){
+      //   setTimeout("$('.alert').fadeOut('slow')", 1000)
+      // });
     </script>
   </body>
 </html>

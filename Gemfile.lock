@@ -90,6 +90,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.5)
+    data-confirm-modal (1.6.2)
+      railties (>= 3.0)
     debug_inspector (0.0.3)
     diff-lcs (1.3)
     dotenv (2.7.5)
@@ -197,6 +199,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
+    rails-i18n (5.1.3)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
     railties (5.2.3)
       actionpack (= 5.2.3)
       activesupport (= 5.2.3)
@@ -294,6 +299,7 @@ DEPENDENCIES
   carrierwave
   chromedriver-helper
   coffee-rails (~> 4.2)
+  data-confirm-modal
   dotenv-rails
   execjs
   factory_bot_rails (~> 4.11)
@@ -311,6 +317,7 @@ DEPENDENCIES
   pry-stack_explorer
   puma (~> 3.11)
   rails (~> 5.2.3)
+  rails-i18n
   ransack
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)

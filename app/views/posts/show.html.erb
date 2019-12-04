@@ -23,7 +23,7 @@
           <% if current_user.id == @post.user.id %>
             <div class="post-show-item">
               <button type="btn" class="btn btn-info"><%= link_to '編集', edit_post_path(@post), class: "text-white"%></button>
-              <button type="btn" class="btn btn-danger"><%= link_to '削除', post_path, method: :delete, class: "text-white" %></button>
+              <button type="btn" class="btn btn-danger"><%= link_to '削除', post_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white" %></button>
             </div>
           <% end %>
         <% end %>
@@ -40,7 +40,7 @@
     <div class="row show-row">
       <div class="offset-md-1 col-md-10">
         <div style='width: 100%;'>
-          <div id="map" style='width: 100%; height: 33vh;'></div>
+          <div id="map" style='width: 100%; height: 600px;'></div>
         </div>
 
         <script type="text/javascript">

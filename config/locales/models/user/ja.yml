@@ -1,0 +1,13 @@
+ja:
+  activerecord:                 ## モデルの開始はactiverecord
+    models:                     ## モデル
+      user: "ユーザー"
+    attributes:                 ## 属性（カラム)
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        image: "プロフィール画像"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        created_at: "登録日時"
+        updated_at: "更新日時"

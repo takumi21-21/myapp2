@@ -25,44 +25,44 @@
               {include_blank: "全て"}, class: 'form-control' %>
             </div>
           </div>
-          <%= f.submit "検索", class: "my-4 offset-md-4 col-md-4 btn btn-success"%>
+          <%= f.submit "検索", class: "my-4 offset-md-4 col-sm-4 btn btn-dark"%>
           <% end %>
         </div>
-    <div class="row">
+        <div class="row">
       <% @posts.each do |post| %>
-          <div class="p-2 col-md-4 border rounded　linkbox post-index">
-            <div class="post-index-single">
-              <h2 class="post-author">
-                <%= link_to post.name, post_path(post) %>
-              </h2>
-              <%= link_to post_path(post) do %>
-                <%= image_tag post.image.url %>
-              <% end %>
-              <% if logged_in? %>
-                <% if !post.favorite_users.include?(current_user) %>
-                  <%= link_to favorites_path(post_id: post.id), method: :post do %>
-                    <%= image_tag 'icons/heart-black.png', class: 'post-index-icon' %>
-                  <% end %>
-                <% else %>
-                  <%= link_to favorites_path(post_id: post.id), method: :delete  do %>
-                    <%= image_tag 'icons/heart-red.png', class: 'post-index-icon' %>
-                  <% end %>
+          <div class="p-2 col-6 col-sm-4 linkbox post-index">
+              <div class="post-index-single">
+                <h2 class="post-author">
+                  <%= link_to post.name, post_path(post) %>
+                </h2>
+                <%= link_to post_path(post) do %>
+                  <%= image_tag post.image.url %>
                 <% end %>
-                <%= post.favorite_users.count %>
-                <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
-                <% end %>
-              <div class="post-index-des">
-                <p><b>投稿者</b><%= post.user.name %></p>
-                <p><b>店名</b><%= post.name %> </p>
-                <p><b>麺</b><%= post.noodle %></p>
-                <p><b>スープ</b><%= post.soup %></p>
-                <p><b>所在地</b><%= post.address %></p>
+                <% if logged_in? %>
+                  <% if !post.favorite_users.include?(current_user) %>
+                    <%= link_to favorites_path(post_id: post.id), method: :post do %>
+                      <%= image_tag 'icons/heart-black.png', class: 'post-index-icon' %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to favorites_path(post_id: post.id), method: :delete  do %>
+                      <%= image_tag 'icons/heart-red.png', class: 'post-index-icon' %>
+                    <% end %>
+                  <% end %>
+                  <%= post.favorite_users.count %>
+                  <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
+                  <% end %>
+                <div class="post-index-des">
+                  <p><b>投稿者</b><%= post.user.name %></p>
+                  <p><b>店名</b><%= post.name %> </p>
+                  <p><b>麺</b><%= post.noodle %></p>
+                  <p><b>スープ</b><%= post.soup %></p>
+                  <p><b>所在地</b><%= post.address %></p>
+                </div>
+                <h5 class="post-index-text-title"><b>コメント</b></h5>
+                <div class="post-index-text">
+                  <p><%= simple_format(post.description) %></p>
+                </div>
               </div>
-              <h5 class="post-index-text-title"><b>コメント</b></h5>
-              <div class="post-index-text">
-                <p><%= simple_format(post.description) %></p>
-              </div>
-            </div>
           </div>
       <% end %>
     </div>

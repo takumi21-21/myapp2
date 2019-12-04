@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
 
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :post_user, only: [:edit, :update]
+
+
   def index
     @posts = Post.all
     @q = Post.ransack(params[:q])
@@ -53,5 +57,14 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:name, :description, :image, :address, :latitude, :longitude, :noodle, :soup)
   end
+
+  def post_user
+    @posts = Post.find_by(id: params[:id])
+    unless current_user.posts.include?(@posts)
+      flash[:danger] = "権限がありません"
+      redirect_to posts_url
+    end
+  end
+
 
 end

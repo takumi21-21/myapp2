@@ -3,10 +3,12 @@
     <h1 class="mb-5">マップから探す</h1>
     <div class="row">
       <div class="col-md-12">
+        <p>住所や駅名、目印などで検索できます。</p>
+        
         <div style='width: 100%;' class="pb-5">
           <div id="map" style='width: 100%; height: 600px;'></div>
         </div>
-        
+
         <script type="text/javascript">
           <% @posts.each do |post| %>
           handler = Gmaps.build('Google');
