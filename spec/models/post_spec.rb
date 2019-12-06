@@ -7,12 +7,15 @@ describe Post, type: :model do
     expect(post).to be_valid
   end
 
- it 'ユーザー、画像、説明文があれば有効' do
+ it 'ユーザー、画像、説明文、麺の種類、スープの種類があれば有効であること' do
    user = FactoryBot.create(:user)
    post = Post.new(
     image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')),
     user: user,
-    description: 'MyString'
+    description: 'MyString',
+    address: "Tokyo",
+    noodle: "極太麺",
+    soup: "濃厚"
    )
    expect(post).to be_valid
  end
@@ -37,6 +40,24 @@ describe Post, type: :model do
      expect(post.errors).to be_added(:description, :blank)
    end
 
+   it '住所がなければ無効なこと' do
+     post.address = nil
+     post.valid?
+     expect(post.errors).to be_added(:address, :blank)
+   end
+
+   it '麺の種類がなければ無効なこと' do
+     post.noodle = nil
+     post.valid?
+     expect(post.errors).to be_added(:noodle, :blank)
+   end
+
+   it 'スープの種類がなければ無効なこと' do
+     post.soup = nil
+     post.valid?
+     expect(post.errors).to be_added(:soup, :blank)
+   end
+
  end
 
  describe '文字数の検証' do
@@ -51,6 +72,7 @@ describe Post, type: :model do
      expect(post.errors).to be_added(:description, :too_long, count: 240)
    end
  end
+
 
 
 end

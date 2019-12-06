@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   before_action :current_user?, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.all.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show
     @user = User.find_by(id: params[:id])
-    @userposts = @user.posts.page(params[:page]).per(6)
+    @userposts = @user.posts.page(params[:page]).per(6).order(created_at: :desc)
   end
 
   def new

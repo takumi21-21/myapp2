@@ -10,8 +10,8 @@ describe 'ポスト管理機能', type: :system do
     context 'ユーザーAがログインしている時' do
       before do
         visit login_path
-        fill_in 'Email', with: 'a@example.com'
-        fill_in 'Password', with: 'password5151'
+        fill_in 'session_email', with: 'a@example.com'
+        fill_in 'session_password', with: 'password5151'
         click_button 'ログイン'
       end
 
