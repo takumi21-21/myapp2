@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :description, presence: true, length: { maximum: 240}
   validates :image, presence: true
+  validates :name, presence: true
   validates :address, presence: true
   validates :noodle, presence: true
   validates :soup, presence: true

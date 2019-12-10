@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :post do
     description { "MyString" }
+    name { "マンモス" }
     address { "Tokyo" }
     noodle { "極太麺" }
     soup { "濃厚" }

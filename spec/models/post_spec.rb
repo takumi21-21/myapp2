@@ -7,18 +7,6 @@ describe Post, type: :model do
     expect(post).to be_valid
   end
 
- it 'ユーザー、画像、説明文、麺の種類、スープの種類があれば有効であること' do
-   user = FactoryBot.create(:user)
-   post = Post.new(
-    image: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')),
-    user: user,
-    description: 'MyString',
-    address: "Tokyo",
-    noodle: "極太麺",
-    soup: "濃厚"
-   )
-   expect(post).to be_valid
- end
 
  describe '存在性の検証' do
 
@@ -44,6 +32,12 @@ describe Post, type: :model do
      post.address = nil
      post.valid?
      expect(post.errors).to be_added(:address, :blank)
+   end
+
+   it '店名がなければ無効なこと' do
+     post.name = nil
+     post.valid?
+     expect(post.errors).to be_added(:name, :blank)
    end
 
    it '麺の種類がなければ無効なこと' do
@@ -73,6 +67,7 @@ describe Post, type: :model do
    end
  end
 
+ 
 
 
 end

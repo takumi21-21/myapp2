@@ -23,18 +23,7 @@
         　投稿一覧
       </div>
     </div>
-    <div class="row user-post-row">
-      <% @userposts.each do |post| %>
-        <div class="col-md-4 user-post-item">
-          <p><b><%= post.name %></b></p>
-          <div class="user-post">
-            <%= link_to post_path(post) do %>
-              <%= image_tag post.image.url %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <%= render partial: "shared/list", locals: { post: @userposts } %>
     <div class="pagination">
       <%= paginate @userposts %>
     </div>

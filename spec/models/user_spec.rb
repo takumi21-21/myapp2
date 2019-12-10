@@ -10,11 +10,6 @@ describe User, type: :model do
   end
 
   it '名前、メールアドレス、パスワードがあれば有効な状態であること' do
-    user = User.new(
-      name: 'Sample User',
-      email: 'sample@example.com',
-      password: 'password1234'
-    )
     expect(FactoryBot.build(:user)).to be_valid
   end
 
@@ -91,6 +86,17 @@ describe User, type: :model do
       expect(@user.errors).to be_added(:password, :too_long, count: 30)
     end
 
+  end
+
+  describe 'その他' do
+    it '削除すると関連する投稿も削除される' do
+      user = FactoryBot.create(:user)
+      post = FactoryBot.create(:post, user: user)
+
+      expect do
+        user.destroy
+      end.to change(Post, :count).by(-1)
+    end
   end
 
 end

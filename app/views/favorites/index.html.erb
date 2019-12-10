@@ -1,24 +1,11 @@
 <div class="favorite-index-wrapper">
   <div class="favorite-index-container">
     <div class="row text-center">
-      <div class="col-md-12 favorite-post-title">
+      <div class="offset-md-1 col-md-11 favorite-post-title">
         お気に入り一覧
       </div>
     </div>
-    <div class="row">
-      <% @favorite_posts.each do |favorite_post| %>
-        <div class="offset-md-1 col-md-3">
-          <div class="favorite-post-index-single">
-            <p class="favorite-post-author">
-              <b><%= favorite_post.name %></b>
-            </p>
-            <%= link_to post_path(id: favorite_post.id) do %>
-              <%= image_tag favorite_post.image.url %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <%= render partial: "shared/list", locals: { post: @favorite_posts } %>
     <div class="paginate">
       <%= paginate @favorite_posts %>
     </div>

@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :post_user, only: [:edit, :update]
+
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :post_user?, only: [:edit, :update, :destroy]
 
 
   def index
@@ -58,9 +59,9 @@ class PostsController < ApplicationController
     params.require(:post).permit(:name, :description, :image, :address, :latitude, :longitude, :noodle, :soup)
   end
 
-  def post_user
-    @posts = Post.find_by(id: params[:id])
-    unless current_user.posts.include?(@posts)
+  def post_user?
+    @post = Post.find_by(id: params[:id])
+    unless @post.user == current_user
       flash[:danger] = "権限がありません"
       redirect_to posts_url
     end
