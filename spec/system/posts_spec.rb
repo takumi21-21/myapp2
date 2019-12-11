@@ -1,25 +1,31 @@
 require 'rails_helper'
 
-describe 'ポスト管理機能', type: :system do
-  describe '一覧表示機能' do
-    before do
-      user_a = FactoryBot.create(:user, name: 'ユーザーA', email: 'a@example.com')
-      FactoryBot.create(:post, description: '最初のポスト', user: user_a)
-    end
+RSpec.feature "Post", type: :system do
+  it "ユーザーは新しい投稿を作成する" do
+    user = FactoryBot.create(:user)
 
-    context 'ユーザーAがログインしている時' do
-      before do
-        visit login_path
-        fill_in 'session_email', with: 'a@example.com'
-        fill_in 'session_password', with: 'password5151'
-        click_button 'ログイン'
-      end
+    visit root_path
+    click_link "ログイン", match: :first
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "ログイン"
 
-      it 'ユーザーAが作成したポストが表示される' do
-        visit posts_path
-        expect(page).to have_content '最初のポスト'
-      end
+    expect {
+      click_link "投稿する"
+      fill_in "店名", with: "ブンブンマル"
+      attach_file "画像", "app/assets/images/images.png"
+      select "太麺", from: "麺の種類"
+      select "濃厚", from: "スープの種類"
+      fill_in "住所", with: "東京都"
+      fill_in "説明文", with: "美味しい"
+      click_button "投稿"
 
-    end
+      expect(page).to have_content "投稿に成功しました"
+      expect(page).to have_content "ブンブンマル"
+      expect(page).to have_content "太麺"
+      expect(page).to have_content "濃厚"
+      expect(page).to have_content "東京都"
+      expect(page).to have_content "美味しい"
+    }.to change(user.posts, :count).by(1)
   end
 end

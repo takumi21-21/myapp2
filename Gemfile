@@ -47,6 +47,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 3.7'
   gem 'factory_bot_rails', '~> 4.11'
+  gem 'selenium-webdriver', '~> 3.4.1'
 end
 
 group :development do
@@ -62,10 +63,10 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'webdrivers'
   gem 'chromedriver-helper'
-
+  gem 'launchy', '~> 2.4.3'
 end
 
 group :production do

@@ -23,10 +23,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      flash.now[:success] = '投稿に成功しました'
+      flash[:success] = '投稿に成功しました'
       redirect_to posts_url
     else
-      flash.now[:danger] = '投稿に失敗しました'
+      flash[:danger] = '投稿に失敗しました'
       render 'new'
     end
   end

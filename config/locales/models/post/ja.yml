@@ -9,6 +9,6 @@ ja:
         description: "説明文"
         image: "画像"
         noodle: "麺の種類"
-        soup: "スープ種類"
+        soup: "スープの種類"
         created_at: "登録日時"
         updated_at: "更新日時"
