@@ -3,12 +3,28 @@
     <h1 class="mb-5">マップから探す</h1>
     <div class="row">
       <div class="col-md-12">
-        <p>住所や駅名、目印などで検索できます。</p>
-        
+      　<h5>地名、駅名から検索できます</h5>
+      　<!-- 検索フォーム -->
+      　<form>
+          <input style= 'width: 40%;' type="text" id="address" >
+          <input type="button" value="検索" id="button" class="btn btn-info">
+        </form>
+        <!-- マップを表示させる要素 -->
         <div style='width: 100%;' class="pb-5">
           <div id="map" style='width: 100%; height: 600px;'></div>
         </div>
+        <script>
+          // ボタンに指定したid要素を取得
+          var button = document.getElementById("button");
 
+          // ボタンが押された時の処理
+          button.onclick = function () {
+          // フォームに入力された住所情報を取得
+          var address = document.getElementById("address").value;
+          // 取得した住所を引数に指定してcodeAddress()関数を実行
+          codeAddress(address);
+          }
+        </script>
         <script type="text/javascript">
           <% @posts.each do |post| %>
           handler = Gmaps.build('Google');
@@ -30,6 +46,57 @@
             handler.getMap().setCenter(new google.maps.LatLng(35.679899, 139.762507))
           });
           <% end %>
+
+
+          　function codeAddress(address) {
+              // google.maps.Geocoder()コンストラクタのインスタンスを生成
+              var geocoder = new google.maps.Geocoder();
+
+              // 地図表示に関するオプション
+              var mapOptions = {
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                // マウスホイールによるズーム操作を無効
+                scrollwheel: true
+              };
+
+
+              // 地図を表示させるインスタンスを生成
+              var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+              function attachMessage(marker, msg) {
+                google.maps.event.addListener(marker, 'click', function(event) {
+                  new google.maps.InfoWindow({
+                    content: msg
+                  }).open(marker.getMap(), marker);
+                });
+              }
+
+              <% @posts.each do |post| %>
+                  var contentString = "住所:<%= post.address %>";
+                  var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+
+                  var myMarker = new google.maps.Marker({
+                    position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>},
+                    map: map,
+                    title: contentString
+                  });
+                  attachMessage(myMarker, '<%= link_to post.name, post_path(post) %>');
+              <% end %>
+              // geocoder.geocode()メソッドを実行
+              geocoder.geocode( { 'address': address}, function(results, status) {
+                // ジオコーディングが成功した場合
+                if (status == google.maps.GeocoderStatus.OK) {
+                  // google.maps.Map()コンストラクタに定義されているsetCenter()メソッドで
+                  // 変換した緯度・経度情報を地図の中心に表示
+                  map.setCenter(results[0].geometry.location);
+                // ジオコーディングが成功しなかった場合
+                } else {
+                  console.log('Geocode was not successful for the following reason: ' + status);
+                }
+              });
+            }
         </script>
       </div>
     </div>

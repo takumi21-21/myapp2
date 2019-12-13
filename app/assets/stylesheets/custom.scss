@@ -21,7 +21,7 @@ a{
     height: 100%;
     img{
       width: 100%;
-      height: 100%
+      height: 100%;
     }
 }
 .navbar-text {
@@ -118,12 +118,12 @@ a{
   margin-top: 30px;
 }
 
-.post-index-single:hover {
+.post-index:hover {
   box-shadow: 0 0 10px 0 black;
 }
 
-.post-index-single{
-  border: solid 3px black;
+.post-index{
+  border: solid 1px black;
   border-radius: 10px;
   padding: 30px;
   .post-author {
