@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-dark bg-dark fixed-top ">
       <%= link_to root_path do %>
-        <span><%= image_tag 'つけ麺.jpg', class: "navbar-brand" %></span>
+        <span><%= image_tag 'つけ麺.png', class: "navbar-brand" %></span>
       <% end %>
       <ul class= "nav navbar navbar-right">
         <li class="navbar-text">
@@ -27,17 +27,17 @@
           <%= link_to "マップ", maps_path %>
         </li>
       <% if logged_in? %>
-        <li class="navbar-text">
-          <%= link_to "お気に入り", favorites_index_path %>
-        </li>
-        <li class= "navbar-text">
-          <%= link_to "ユーザー一覧", users_path %>
-        </li>
-        <li class="navbar-text">
-          <%= link_to "投稿する", new_post_path %>
-        </li>
-        <li class="navbar-text">
-          <%= link_to "ログアウト", logout_path, method: :delete %>
+        <li class="mr-4">
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           </button>
+           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "お気に入り", favorites_index_path, class: "dropdown-item" %>
+              <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
+              <%= link_to "投稿する", new_post_path, class: "dropdown-item"%>
+              <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
+            </div><!-- /.dropdown-menu -->
+          </div>
         </li>
         <li class="navbar-text current_user">
           <% if current_user.image.attached? %>

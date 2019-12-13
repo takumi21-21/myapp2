@@ -39,18 +39,10 @@
                   <%= image_tag post.image.url %>
                 <% end %>
                 <% if logged_in? %>
-                  <% if !post.favorite_users.include?(current_user) %>
-                    <%= link_to favorites_path(post_id: post.id), method: :post do %>
-                      <%= image_tag 'icons/heart-black.png', class: 'post-index-icon' %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to favorites_path(post_id: post.id), method: :delete  do %>
-                      <%= image_tag 'icons/heart-red.png', class: 'post-index-icon' %>
-                    <% end %>
-                  <% end %>
-                  <%= post.favorite_users.count %>
-                  <%= image_tag 'icons/comment.png', class: 'post-index-icon' %>
-                  <% end %>
+                  <div id='likes_buttons_<%= post.id %>'>
+                    <%= render partial: 'favorites/favorite', locals: { post: post } %>
+                  </div>
+                <% end %>
                 <div class="post-index-des">
                   <p><b>投稿者</b><%= post.user.name %></p>
                   <p><b>店名</b><%= post.name %> </p>

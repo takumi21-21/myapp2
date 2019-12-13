@@ -6,16 +6,9 @@
         <div class="post-show-image">
           <%= image_tag @post.image.url %>
           <% if logged_in? %>
-            <% if !@post.favorite_users.include?(current_user) %>
-              <%= link_to favorites_path(post_id: @post.id), method: :post  do %>
-                <%= image_tag 'icons/heart-black.png', class: 'post-show-icon' %>
-              <% end %>
-            <% else %>
-              <%= link_to favorites_path(post_id: @post.id), method: :delete  do %>
-                <%= image_tag 'icons/heart-red.png', class: 'post-show-icon' %>
-              <% end %>
-            <% end %>
-            <%= @post.favorite_users.count %>
+          <div id='likes_buttons_<%= @post.id %>'>
+            <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+          </div>
             <%= image_tag 'icons/comment.png', class: 'post-show-icon' %>
           <% end %>
         </div>

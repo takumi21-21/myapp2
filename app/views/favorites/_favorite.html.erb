@@ -1,0 +1,10 @@
+<% if !post.favorite_users.include?(current_user) %>
+  <%= link_to favorites_path(post_id: post.id), method: :post, remote: true do %>
+    <%= image_tag 'icons/白ハート.png', class: 'post-index-icon post-show-icon' %>
+  <% end %>
+<% else %>
+  <%= link_to favorites_path(post_id: post.id), method: :delete, remote: true  do %>
+    <%= image_tag 'icons/赤ハート.png', class: 'post-index-icon post-show-icon' %>
+  <% end %>
+<% end %>
+<%= post.favorite_users.count %>

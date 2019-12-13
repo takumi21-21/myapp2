@@ -5,23 +5,17 @@ class FavoritesController < ApplicationController
   end
 
   def create
+    @post = Post.find(params[:post_id])
     favorite = Favorite.new
     favorite.user_id = current_user.id
     favorite.post_id = params[:post_id]
-
-    if favorite.save
-      flash[:success] = "お気に入りに登録しました"
-      redirect_to posts_path
-    else
-      flash[:danger] = "お気に入りの登録に失敗しました"
-      redirect_to posts_path
-    end
+    favorite.save
   end
 
   def destroy
-    @favorite = Favorite.find_by(post_id: params[:post_id], user_id: current_user.id)
-    @favorite.destroy
-    flash[:success] = "お気に入りを解除しました"
-    redirect_to posts_path
+    @post = Post.find(params[:post_id])
+    favorite = Favorite.find_by(post_id: params[:post_id], user_id: current_user.id)
+    favorite.destroy
   end
+
 end

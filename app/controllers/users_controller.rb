@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       flash[:success] = "登録が完了しました"
       redirect_to @user
     else
-      flash.now[:danger] = "登録に失敗しました"
+      flash[:danger] = "登録に失敗しました"
       render 'new'
     end
   end
@@ -38,8 +38,8 @@ class UsersController < ApplicationController
       flash.now[:success] = "更新しました"
       redirect_to @user #user_url(@user)
     else
-      flash.now[:danger] = "更新に失敗しました"
-      render 'edit'
+      flash[:danger] = "更新に失敗しました"
+      redirect_to edit_user_path(@user)
     end
   end
 
@@ -59,10 +59,11 @@ class UsersController < ApplicationController
 
 
   def current_user?
-    @user = User.find_by(id: params[:id])
-    unless @user == current_user
-      flash[:danger] = "権限がありません"
-      redirect_to users_url
+    if @user = User.find(params[:id])
+      unless @user == current_user
+        flash[:danger] = "権限がありません"
+        redirect_to users_url
+      end
     end
   end
 
