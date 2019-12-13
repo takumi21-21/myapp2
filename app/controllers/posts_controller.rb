@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       flash[:success] = '投稿に成功しました'
       redirect_to posts_url
     else
-      flash[:danger] = '投稿に失敗しました'
+      flash.now[:danger] = '投稿に失敗しました'
       render 'new'
     end
   end
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
       flash[:success] = "投稿を更新しました"
       redirect_to posts_url
     else
-      flash[:danger] = "投稿の更新に失敗しました"
+      flash.now[:danger] = "投稿の更新に失敗しました"
       render 'edit'
     end
   end
