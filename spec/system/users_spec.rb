@@ -15,7 +15,7 @@ RSpec.describe "Users", type: :system do
 
       expect(page).to have_content "登録が完了しました"
       expect(page).to have_content "takumi"
-      # expect(page).to have_selector ("app/assets/images/images.png")
+      expect(page).to have_selector "img"
       expect(page).to have_content "編集"
       expect(page).to have_content "削除"
     }.to change(User, :count).by(1)

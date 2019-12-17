@@ -41,7 +41,7 @@
         </li>
         <li class="navbar-text current_user">
           <% if current_user.image.attached? %>
-            <%= image_tag current_user.image, class: "round-circle"%>
+          <%= image_tag current_user.image, class: "round-circle"%>
           <% end %>
           <%= link_to current_user.name, user_path(current_user) %>
         </li>
@@ -55,9 +55,15 @@
       <% end %>
       </ul>
     </nav>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <div class="container-fluid">
+      <% if flash.present? %>
+        <div class="row text-center">
+          <div class="mb-5 offset-2 col-8">
+            <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
       <%= yield %>
     </div>

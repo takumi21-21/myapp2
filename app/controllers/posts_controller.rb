@@ -13,6 +13,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by(id: params[:id])
+    @review = Review.new
+    @reviews = @post.reviews
   end
 
   def new

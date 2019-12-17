@@ -2,6 +2,7 @@
   <div class="container">
         <div class="p-4 mt-4 search-form border bg-red">
           <h4><b>検索</b></h4>
+          <p>好みのつけ麺を探そう！</p>
           <%= search_form_for @q do |f| %>
           <div class="row">
             <div class="col-md-6">
@@ -31,30 +32,59 @@
         <div class="row">
       <% @posts.each do |post| %>
           <div class="col-6 post-index">
-              <div class="post-index-single">
-                <h2 class="post-author">
-                  <%= link_to post.name, post_path(post) %>
-                </h2>
-                <%= link_to post_path(post) do %>
-                  <%= image_tag post.image.url %>
-                <% end %>
+            <div class="post-index-single">
+              <h2 class="post-author">
+                <%= link_to post.name, post_path(post) %>
+              </h2>
+              <%= link_to post_path(post) do %>
+                <%= image_tag post.image.url, class: "post-index-image" %>
+              <% end %>
+              <div class="clearfix post-index-parent">
                 <% if logged_in? %>
-                  <div id='likes_buttons_<%= post.id %>'>
-                    <%= render partial: 'favorites/favorite', locals: { post: post } %>
+                <div id='likes_buttons_<%= post.id %>', class="post-index-likes-button" >
+                  <%= render partial: 'favorites/favorite', locals: { post: post } %>
+                </div>
+                <% end %>
+
+                <% if post.reviews.count > 0 %>
+                  <div class="post-index-star">
+                    <span class="post-star-title mr-2">総合評価</span>
+                    <span id='post-star-rate-<%= post.id %>', class="post-index-star-rate mr-2"></span>
+                    <span><b><%= post.reviews.sum(:rate) / post.reviews.count%></b></span>
+                  </div>
+                  <script>
+                  $('#post-star-rate-<%= post.id %>').raty({
+                    size: 30,
+                    starOff: '<%= asset_path('star-off.png') %>',
+                    starOn: '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    half: true,
+                    readOnly: true,
+                    score: <%= post.reviews.sum(:rate) / post.reviews.count %> ,
+                  });
+                  </script>
+                <% else %>
+                  <div class="post-index-star">
+                    <span class="post-star-title mr-2">レビューがありません。</span>
                   </div>
                 <% end %>
-                <div class="post-index-des">
-                  <p><b>投稿者</b><%= post.user.name %></p>
-                  <p><b>店名</b><%= post.name %> </p>
-                  <p><b>麺</b><%= post.noodle %></p>
-                  <p><b>スープ</b><%= post.soup %></p>
-                  <p><b>所在地</b><%= post.address %></p>
-                </div>
-                <h5 class="post-index-text-title"><b>コメント</b></h5>
-                <div class="post-index-text">
-                  <p><%= simple_format(post.description) %></p>
-                </div>
               </div>
+
+
+
+
+              <div class="post-index-des">
+                <p><b>投稿者</b><%= post.user.name %></p>
+                <p><b>店名</b><%= post.name %> </p>
+                <p><b>麺</b><%= post.noodle %></p>
+                <p><b>スープ</b><%= post.soup %></p>
+                <p><b>所在地</b><%= post.address %></p>
+              </div>
+              <h5 class="post-index-text-title"><b>投稿者コメント</b></h5>
+              <div class="post-index-text">
+                <%= simple_format(post.description) %>
+              </div>
+            </div>
           </div>
       <% end %>
     </div>

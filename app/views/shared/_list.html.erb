@@ -1,8 +1,8 @@
-<div class="row user-post-row">
+<div class="row user-post-row text-center">
   <% post.each do |f| %>
-    <div class="offset-md-1 col-md-3 user-post-item">
+    <div class="col-md-6 user-post-item">
       <p><b><%= f.name %></b></p>
-      <div class="user-post">
+      <div class="mb-5 user-post">
         <%= link_to post_path(f) do %>
           <%= image_tag f.image.url %>
         <% end %>

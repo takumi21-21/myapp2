@@ -11,15 +11,15 @@
           <h1><%= @user.name %></h1>
           <% if logged_in? %>
             <% if current_user.id == @user.id %>
-              <button type="btn" class="btn btn-info"><%= link_to '編集', edit_user_path, class: "text-white" %></button>
-              <button type="btn" class="btn btn-danger"><%= link_to '削除', user_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white" %></button>
+              <%= link_to '編集', edit_user_path, class: "text-white btn btn-success" %>
+              <%= link_to '削除', user_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white btn btn-danger" %>
             <% end %>
           <% end %>
         </div>
       </div>
     </div>
     <div class="row text-center">
-      <div class="user-post-title col-md-10">
+      <div class="user-post-title col-md-12">
         　投稿一覧
       </div>
     </div>

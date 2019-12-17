@@ -11,6 +11,7 @@ RSpec.feature "Post", type: :system do
     click_button "ログイン"
 
     expect {
+      find('.dropdown-toggle').click　#ドロップダウンのボタンをクリック
       click_link "投稿する"
       fill_in "店名", with: "ブンブンマル"
       attach_file "画像", "app/assets/images/images.png"
@@ -22,6 +23,7 @@ RSpec.feature "Post", type: :system do
 
       expect(page).to have_content "投稿に成功しました"
       expect(page).to have_content "ブンブンマル"
+      expect(page).to have_selector "img"
       expect(page).to have_content "太麺"
       expect(page).to have_content "濃厚"
       expect(page).to have_content "東京都"

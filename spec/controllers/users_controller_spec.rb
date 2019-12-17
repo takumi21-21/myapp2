@@ -10,10 +10,64 @@ RSpec.describe UsersController, type: :controller do
     session[:user_id] = user.id
   end
 
+  describe "indexアクション" do
+    context "ログインユーザーの場合" do
+      before do
+        log_in @user
+      end
+
+      it 'ユーザー一覧にアクセスできること' do
+        get :index
+        expect(response).to be_success
+      end
+    end
+
+    context '未ログインユーザー' do
+      it '302レスポンスを返すこと' do
+        get :index
+        expect(response).to have_http_status "302"
+      end
+
+      it 'ユーザー一覧ページにアクセスするとログインページに遷移すること' do
+        get :index
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
+
+  describe "showアクション" do
+    context 'ログインユーザー' do
+      before do
+        log_in @user
+      end
+
+      it '自分の詳細ページにアクセス出来ること' do
+        get :show, params: { id: @user.id }
+        expect(response).to be_success
+      end
+
+      it '他のユーザーの詳細ページにアクセス出来ること' do
+        get :show, params: { id: @other_user.id }
+        expect(response).to be_success
+      end
+    end
+
+    context '未ログインユーザー' do
+      it '302レスポンスを返すこと' do
+        get :show, params: { id: @user.id }
+        expect(response).to have_http_status "302"
+      end
+
+      it 'ログインページに遷移すること' do
+        get :show, params: { id: @user.id }
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
+
   describe "editアクション" do
     context "ログインユーザーの場合" do
       before do
-        @user = FactoryBot.create(:user)
         log_in @user
       end
 

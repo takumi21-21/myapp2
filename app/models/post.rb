@@ -12,4 +12,5 @@ class Post < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: 'user'
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+  has_many :reviews, dependent: :destroy
 end

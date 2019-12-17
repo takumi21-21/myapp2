@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :maps, only: [:index]
+  resources :reviews
   get '/map_request', to: 'maps#map', as: 'map_request'
 
   get 'favorites/index'

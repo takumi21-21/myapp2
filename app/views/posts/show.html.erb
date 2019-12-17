@@ -1,40 +1,62 @@
 <div class="show-wrapper">
-  <div class="container show-container">
+  <div class="container-fluid show-container">
       <h2 class="post-show-name"><%= @post.name %></h2>
-    <div class="row show-row">
-      <div class="col-md-6">
-        <div class="post-show-image">
-          <%= image_tag @post.image.url %>
-          <% if logged_in? %>
-          <div id='likes_buttons_<%= @post.id %>'>
-            <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+      <div class="row">
+        <div class="col-6">
+          <div class="post-show-image">
+            <%= image_tag @post.image.url %>
           </div>
-            <%= image_tag 'icons/comment.png', class: 'post-show-icon' %>
-          <% end %>
         </div>
-        <% if logged_in? %>
-          <% if current_user.id == @post.user.id %>
-            <div class="post-show-item">
-              <button type="btn" class="btn btn-info"><%= link_to '編集', edit_post_path(@post), class: "text-white"%></button>
-              <button type="btn" class="btn btn-danger"><%= link_to '削除', post_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white" %></button>
+        <div class="col-md-6 col-sm-12">
+          <div class="post-show-des">
+            <p><b>投稿者</b>: <%= @post.user.name %></p>
+            <p><b>麺</b>: <%= @post.noodle %></p>
+            <p><b>スープ</b>: <%= @post.soup %></p>
+            <p><b>所在地</b>: <%= @post.address %></p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <% if logged_in? %>
+            <div id='likes_buttons_<%= @post.id %>', class="likes_button">
+              <%= render partial: 'favorites/favorite', locals: { post: @post } %>
             </div>
           <% end %>
-        <% end %>
-      </div>
-      <div class="col-md-6">
-        <div class="post-show-des">
-          <p><b>投稿者</b>: <%= @post.user.name %></p>
-          <p><b>麺</b>: <%= @post.noodle %></p>
-          <p><b>スープ</b>: <%= @post.soup %></p>
-          <p><b>所在地</b>: <%= @post.address %></p>
+          <% if @reviews.sum(:rate) > 0 %>
+            <div class="post-show-star">
+              <span class="visible-sm post-star-title">総合:</span>
+              <span id='post-star-rate', class="post-star-rate"></span>
+              <span class="reviews-score"><%= @reviews.sum(:rate) / @reviews.count %></span>
+            </div>
+            <script>
+            $('#post-star-rate').raty({
+              size: 30,
+              starOff: '<%= asset_path('star-off.png') %>',
+              starOn: '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= @reviews.sum(:rate) / @reviews.count %> ,
+            });
+            </script>
+          <% end %>
+          <% if logged_in? && current_user.id == @post.user.id %>
+          <div class="post-show-item">
+            <%= link_to '編集', edit_post_path(@post), class: "text-white btn btn-success"%>
+            <%= link_to '削除', post_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white btn btn-danger" %>
+          </div>
+          <% end %>
         </div>
       </div>
-    </div>
-    <div class="row show-row">
-      <div class="offset-md-1 col-md-10">
-        <h2>店の住所</h2>
+
+
+  　<!-- マップ -->
+    <div class="row show-row mb-5">
+      <div class="col-md-12">
+        <h2 class="map-title text-center">お店の場所</h2>
         <div style='width: 100%;'>
-          <div id="map" style='width: 100%; height: 600px;'></div>
+          <div id="map" style='width: 100%; height: 300px;'></div>
         </div>
 
         <script type="text/javascript">
@@ -58,5 +80,86 @@
         </script>
       </div>
     </div>
+
+    <% if logged_in? %>
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2 class="review-title text-center ">レビューを書く</h2>
+          <%= form_for @review do |f| %>
+          　<!-- post_idとuser_idを渡す -->
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <div class="form-group" id="star">
+              <%= f.label :rate, '評価', class: 'col-md-3' %>
+              <%= f.hidden_field :rate, id: :review_star %>
+            </div>
+            <div class="form-group">
+              <%= f.label :content, 'レビュー内容', class: "col-md-3"%>
+              <%= f.text_area :content, rows: 10, class: "col-md-6"%>
+            </div>
+
+            <!-- 評価のjavascript -->
+            <script>
+              $('#star').raty({
+                starOff: '<%= asset_path('star-off.png') %>',
+                starOn: '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'review[rate]',
+                half: true,
+              });
+            </script>
+            <div class="form-group row justify-content-end">
+              <div class="col-md-9">
+                <%= f.submit '投稿する', class:"btn btn-success" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% if @reviews.present? %>
+      <div class="row">
+        <h5 class="m-3 col-md-12 text-center">レビュー一覧</h5>
+      </div>
+      <% @reviews.each do |review| %>
+        <div class="review offset-md-1 col-md-10 mb-5">
+          <div class="row pt-3">
+            <div class="pl-3 pr-3">評価</div>
+            <div id="star-rate-<%= review.id %>"></div>
+            <h4 class="col-md-7"><%= review.rate %>点</h4>
+            <div class="review-user pl-3">
+              投稿者: <%= review.user.name %>
+              <div class="review-user-image">
+                <%= image_tag review.user.image, width: '30px', height: '30px' %>
+              </div>
+            </div>
+            <script>
+              $('#star-rate-<%= review.id %>').raty({
+                size: 36,
+                starOff: '<%= asset_path('star-off.png') %>',
+                starOn: '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: <%= review.rate %>,
+              });
+            </script>
+          </div>
+          <div class="row pt-3 h-100">
+            <div class="col-md-12 review-content p-3">
+              <%= simple_format(review.content) %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-right pb-2">
+              <% if current_user == review.user %>
+              <%= link_to '編集', edit_review_path(review), class: 'btn btn-success' %>
+              <%= link_to '削除', review_path, method: :delete, data: { confirm: "投稿を削除しますか", cancel: "やめる", commit: "削除する"}, title: "削除確認", class: "text-white btn btn-danger", class: 'btn btn-danger' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
