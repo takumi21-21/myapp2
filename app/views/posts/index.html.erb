@@ -50,7 +50,8 @@
                   <div class="post-index-star">
                     <span class="post-star-title mr-2">総合評価</span>
                     <span id='post-star-rate-<%= post.id %>', class="post-index-star-rate mr-2"></span>
-                    <span><b><%= post.reviews.sum(:rate) / post.reviews.count%></b></span>
+                    <% n = post.reviews.sum(:rate) / post.reviews.count%>
+                    <span><b><%= n.round(1) %></b></span>
                   </div>
                   <script>
                   $('#post-star-rate-<%= post.id %>').raty({
@@ -64,8 +65,8 @@
                   });
                   </script>
                 <% else %>
-                  <div class="post-index-star">
-                    <span class="post-star-title mr-2">レビューがありません。</span>
+                  <div class="post-index-star non-review">
+                    レビューがありません。
                   </div>
                 <% end %>
               </div>

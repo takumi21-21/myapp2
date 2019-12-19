@@ -200,6 +200,9 @@ a{
   top: 50%;
   left: 50%;
   transform: translateY(-50%);
+  width: 50%;
+  float: left;
+  text-align: right;
 }
 
 .post-index-star-rate {
@@ -207,6 +210,11 @@ a{
   img {
 
   }
+}
+
+.non-review {
+  float: left;
+  font-size: 80%;
 }
 
 //post-show
