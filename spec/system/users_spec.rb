@@ -20,4 +20,5 @@ RSpec.describe "Users", type: :system do
       expect(page).to have_content "削除"
     }.to change(User, :count).by(1)
   end
+
 end

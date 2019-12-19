@@ -30,4 +30,6 @@ RSpec.feature "Post", type: :system do
       expect(page).to have_content "美味しい"
     }.to change(user.posts, :count).by(1)
   end
+
+  
 end
