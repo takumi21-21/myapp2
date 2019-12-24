@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @userposts = @user.posts.page(params[:page]).per(8).order(created_at: :desc)
+    @favorite_posts = @user.favorite_posts
   end
 
   def new

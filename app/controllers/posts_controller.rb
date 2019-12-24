@@ -15,6 +15,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @review = Review.new
     @reviews = @post.reviews
+    @review_average = @reviews.sum(:rate) / @reviews.count
   end
 
   def new

@@ -1,26 +1,26 @@
 <div class="post-index-wrapper">
   <div class="container">
         <div class="p-4 mt-4 search-form border bg-red">
-          <h4><b>検索</b></h4>
-          <p>好みのつけ麺を探そう！</p>
+          <h3><b>検索</b></h3>
+          <h4>好みのつけ麺を探そう！</h4>
           <%= search_form_for @q do |f| %>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-12">
               <%= f.label :"店名" %>
               <%= f.search_field :name_cont, class: 'form-control' %>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-12">
               <%= f.label :"住所" %>
               <%= f.search_field :address_cont, class: 'form-control' %>
             </div>
           </div>
           <div class="row">
-            <div class="mt-3 col-md-6">
+            <div class="mt-3 col-md-6 col-xs-12">
               <%= f.label :"麺の種類" %>
               <%= f.select :noodle_eq, ["極太麺", "太麺", "中太麺", "細麺"],
               {include_blank: "全て"}, class: 'form-control' %>
             </div>
-            <div class="mt-3 col-md-6">
+            <div class="mt-3 col-md-6 col-xs-12">
               <%= f.label :"スープの種類" %>
               <%= f.select :soup_eq, ["濃厚", "普通", "あっさり"],
               {include_blank: "全て"}, class: 'form-control' %>
@@ -31,7 +31,7 @@
         </div>
         <div class="row">
       <% @posts.each do |post| %>
-          <div class="col-6 post-index">
+          <div class="col-xs-12 col-sm-6 post-index">
             <div class="post-index-single">
               <h2 class="post-author">
                 <%= link_to post.name, post_path(post) %>
@@ -45,12 +45,12 @@
                   <%= render partial: 'favorites/favorite', locals: { post: post } %>
                 </div>
                 <% end %>
-
+                <!-- レビュー画面 -->
                 <% if post.reviews.count > 0 %>
                   <div class="post-index-star">
                     <span class="post-star-title mr-2">総合評価</span>
                     <span id='post-star-rate-<%= post.id %>', class="post-index-star-rate mr-2"></span>
-                    <% n = post.reviews.sum(:rate) / post.reviews.count%>
+                    <% n = post.reviews.sum(:rate) / post.reviews.count %>
                     <span><b><%= n.round(1) %></b></span>
                   </div>
                   <script>
@@ -61,7 +61,7 @@
                     starHalf: '<%= asset_path('star-half.png') %>',
                     half: true,
                     readOnly: true,
-                    score: <%= post.reviews.sum(:rate) / post.reviews.count %> ,
+                    score: <%= n %> ,
                   });
                   </script>
                 <% else %>
@@ -71,11 +71,10 @@
                 <% end %>
               </div>
 
-
-
-
               <div class="post-index-des">
-                <p><b>投稿者</b><%= post.user.name %></p>
+                <% if logged_in? %>
+                  <p><b>投稿者</b><%= post.user.name %></p>
+                <% end %>
                 <p><b>店名</b><%= post.name %> </p>
                 <p><b>麺</b><%= post.noodle %></p>
                 <p><b>スープ</b><%= post.soup %></p>

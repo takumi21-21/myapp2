@@ -7,4 +7,6 @@
     <%= image_tag 'icons/赤ハート.png', class: 'post-index-icon post-show-icon' %>
   <% end %>
 <% end %>
-<%= post.favorite_users.count %>
+<div class="pt-3 favorite-users-count">
+  <%= post.favorite_users.count %>
+</div>

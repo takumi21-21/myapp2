@@ -19,11 +19,11 @@
       </div>
     </div>
     <div class="row text-center">
-      <div class="user-post-title col-md-12">
+      <div class="user-post-title col-xs-12 col-md-12">
         　投稿一覧
       </div>
     </div>
-    <%= render partial: "shared/list", locals: { post: @userposts } %>
+     <%= render partial: "shared/list", locals: { post: @userposts } %>
     <div class="pagination">
       <%= paginate @userposts %>
     </div>

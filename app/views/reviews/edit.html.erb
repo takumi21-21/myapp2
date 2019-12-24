@@ -1,0 +1,37 @@
+<div class="review-edit-wrapper">
+  <div class="edit-container container">
+    <div class="row">
+        <div class="col-md-12">
+          <h2 class="col-md-12 review-title text-center">レビュー編集</h2>
+          <%= form_for @review do |f| %>
+          　<!-- post_idとuser_idを渡す -->
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <div class="form-group" id="star">
+              <%= f.label :rate, '評価', class: 'col-md-3' %>
+              <%= f.hidden_field :rate, id: :review_star %>
+            </div>
+            <div class="form-group">
+              <%= f.label :content, 'レビュー内容', class: "col-md-3"%>
+              <%= f.text_area :content, rows: 10, class: "col-md-6"%>
+            </div>
+            <!-- 評価のjavascript -->
+            <script>
+              $('#star').raty({
+                starOff: '<%= asset_path('star-off.png') %>',
+                starOn: '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'review[rate]',
+                half: true,
+              });
+            </script>
+            <div class="form-group row justify-content-end">
+              <div class="col-md-9">
+                <%= f.submit '投稿', class:"btn btn-success" %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

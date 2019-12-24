@@ -11,6 +11,24 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = Review.find_by(id: params[:id])
+    @post = @review.post
+  end
+
+  def update
+    @review = Review.find_by(id: params[:id])
+    @post = @review.post
+    if @review = @review.update_attributes(review_params)
+      flash[:success] = "レビューを更新しました。"
+      redirect_to post_url @post
+    else
+      flash[:danger] = "レビューの更新に失敗しました。"
+      redirect_to post_url @post
+    end
+  end
+
+
   def destroy
     post = Post.find_by(id: params[:id])
     review = Review.find_by(post_id: post.id, user_id: current_user.id)
@@ -18,7 +36,6 @@ class ReviewsController < ApplicationController
     flash[:success] = "レビューを削除しました。"
     redirect_to post_path(id: post.id)
   end
-
 
 
   private
