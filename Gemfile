@@ -90,3 +90,5 @@ gem 'data-confirm-modal'
 gem 'rails-i18n'
 gem 'fog-aws'
 gem 'aws-sdk-s3', require: false
+gem 'omniauth'
+gem 'omniauth-twitter'

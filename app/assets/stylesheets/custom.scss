@@ -1,5 +1,6 @@
 
 body {
+  height: 100%;
   background-color: #f2f2f2;
 }
 
@@ -11,6 +12,7 @@ body {
 
 .container {
   margin-top: 140px;
+  margin-bottom: 200px;
 }
 
 a{
@@ -50,6 +52,9 @@ a{
 
 
 .current_user {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   img {
     height: 50px;
     width: 50px;
@@ -391,4 +396,16 @@ a{
 
 .pagination {
   padding: 20px 0px 20px;
+}
+
+//footer
+.footer {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.footer-content {
+  margin: auto;
+  color: #fff;
 }
