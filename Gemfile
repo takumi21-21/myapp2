@@ -78,7 +78,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jquery-rails'
 gem 'execjs'
 gem 'mini_racer'
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'bcrypt'
 gem 'carrierwave'
 gem 'gmaps4rails'
