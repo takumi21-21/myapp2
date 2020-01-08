@@ -4,7 +4,9 @@
       <div class="col-md-12">
         <div class="user-info">
             <% if @user.image.attached? %>
-            <%= image_tag @user.image %>
+             <%= image_tag @user.image %>
+            <% else %>
+             <%= image_tag @user.image_url %>
             <% end %>
         </div>
         <div class="user-item">

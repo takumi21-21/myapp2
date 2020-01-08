@@ -6,7 +6,11 @@
         <% @users.each do |user| %>
           <ul>
             <li class= "text-black">
-              <%= image_tag user.image if user.image.attached? %>
+              <% if user.image.attached? %>
+                <%= image_tag user.image %>
+              <% else %>
+                <%= image_tag user.image_url %>
+              <% end %>
               <%= link_to user.name, user %>
             </li>
           </ul>

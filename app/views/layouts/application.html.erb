@@ -42,7 +42,9 @@
         </li>
         <li class="navbar-text nav-item current_user text-left">
           <% if current_user.image.attached? %>
-          <%= image_tag current_user.image, class: "d-none d-sm-inline-block round-circle"%>
+            <%= image_tag current_user.image, class: "d-none d-sm-inline-block round-circle" %>
+          <% else %>
+            <%= image_tag current_user.image_url, class: "d-none d-sm-inline-block round-circle" %>
           <% end %>
           <%= link_to current_user.name, user_path(current_user) %>
         </li>
@@ -68,7 +70,7 @@
       <% end %>
       <%= yield %>
     </div>
-    <footer class="fixed-bottom mt-3　bg-dark">
+    <footer>
       <div class="bg-dark footer mt-3">
         <p class="footer-content">@takumi abe</p>
       </div>
