@@ -1,7 +1,12 @@
 
+
 body {
   height: 100%;
-  background-color: #f2f2f2;
+  background-color: #fff;
+  position: relative;
+  // background-image: url(つけ麺top.jpg);
+  // background-size: cover;
+  // background-repeat: no-repeat;
 }
 
 .clearfix::after {
@@ -34,7 +39,6 @@ a{
     height: 100%;
   }
 }
-
 
 
 //ナビゲーションバー
@@ -105,7 +109,10 @@ a{
 .user-item {
   padding: 0 20px 0 0;
   float: left;
-  width: 50%;
+  // width: 50%;
+  h1 {
+    margin-bottom: 20px;
+  }
   p {
     display: inline-block;
     padding-right: 15px;
@@ -400,9 +407,12 @@ a{
 
 //footer
 .footer {
+  width: 100%;
   height: 40px;
   text-align: center;
   padding-top: 10px;
+  // position: absolute;
+  // bottom: 0;
 }
 
 .footer-content {

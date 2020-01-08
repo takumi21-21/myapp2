@@ -136,7 +136,11 @@
             <div class="review-user pl-3">
               投稿者: <%= review.user.name %>
               <div class="review-user-image">
-                <%= image_tag review.user.image, width: '30px', height: '30px' %>
+                <% if review.user.image.attached? %>
+                　<%= image_tag review.user.image, width: '30px', height: '30px' %>
+                <% else %>
+                  <%= image_tag review.user.image_url %>
+                <% end %>
               </div>
             </div>
             <script>
