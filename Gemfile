@@ -92,4 +92,5 @@ gem 'fog-aws'
 gem 'aws-sdk-s3', require: false
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 gem 'devise'

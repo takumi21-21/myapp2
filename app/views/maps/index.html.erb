@@ -34,10 +34,10 @@
               "lat": <%= post.latitude %>,
               "lng": <%= post.longitude %>,
               "picture": {
-                "width":  32,
-                "height": 32
+                "width":  20,
+                "height": 20
               },
-              "infowindow": '<%= link_to post.name, post_path(post) %>'
+              "infowindow": '<%=link_to post_url(post) do %><%= image_tag post.image.url, :size=>'200x150' %><% end %>'
             }
             ]);
             handler.bounds.extendWith(markers);
@@ -82,7 +82,7 @@
                     map: map,
                     title: contentString
                   });
-                  attachMessage(myMarker, '<%= link_to post.name, post_path(post) %>');
+                  attachMessage(myMarker, '<%=link_to post_path(post) do %><%= image_tag post.image.url, :size=>'200x150'%><% end %>');
               <% end %>
               // geocoder.geocode()メソッドを実行
               geocoder.geocode( { 'address': address}, function(results, status) {

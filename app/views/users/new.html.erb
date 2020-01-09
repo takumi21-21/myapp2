@@ -6,5 +6,7 @@
         <%= render partial: "shared/form", locals: { user: @user } %>
       </div>
     </div>
+    <%= link_to "Twitterアカウントで登録", "/auth/twitter/", class: 'mt-3 btn btn-primary'%>
+    <%= link_to "Facebookアカウントで登録", "/auth/facebook/", class: 'mt-3 btn btn-dark'%>
   </div>
 </div>
