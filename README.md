@@ -3,6 +3,7 @@
 # URL
 https://tukemen-myapp.herokuapp.com/posts
 
+つけ麺の画像を投稿し、登録した住所から場所をマップに表示するアプリを作成しました。
 
 # 使用技術
 * Ruby 2.5.7, Rails 5.2.3
